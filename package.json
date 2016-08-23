@@ -1,0 +1,25 @@
+{
+  "name": "mirrorfashion",
+  "version": "1.0.0",
+  "description": "Projeto utilizado para o estudo de automação de aplicações front-end com Gulp.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UpperApps/mirrorfashion.git"
+  },
+  "author": "Rodrigo Melo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UpperApps/mirrorfashion/issues"
+  },
+  "homepage": "https://github.com/UpperApps/mirrorfashion#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-imagemin": "^2.3.0"
+  }
+}
