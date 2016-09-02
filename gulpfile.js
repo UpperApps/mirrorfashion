@@ -6,7 +6,10 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     usemin = require('gulp-usemin'),
     cssmin = require('gulp-cssmin'),
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
+    jshint = require('gulp-jshint'),
+    jshintStylish = require('jshint-stylish'),
+    csslint = require('gulp-csslint');
 
 //Obs.:
 //1- O Gulp por padrão trabalha assincronamente, ao contrário do Grunt que é
@@ -53,7 +56,7 @@ gulp.task('usemin', function() {
 
 //Cria um servidor local com o plugin browser-sync.
 gulp.task('server', function() {
-  
+
     //O plugin browser-sync permite criar um servidor local que fica sincronozado com
     //o navegador padrão do compuotador. Ao ser executado ele também fornece um link
     //para permitir que ele seja acessado por outros dispositivos na mesma rede, como
@@ -68,4 +71,22 @@ gulp.task('server', function() {
     //fonte especificada e chama a função passada no segundo parâmetro quando
     //disparado o evento especificado.
     gulp.watch('src/**/*').on('change', browserSync.reload);
+
+    //Habilita o plugin jshint que permite exibir os erros de código javascript
+    //no console.
+    gulp.watch('src/js/**/*.js').on('change', function(event) {
+        console.log("Linting " + event.path);
+        gulp.src(event.path)
+            .pipe(jshint())
+            .pipe(jshint.reporter(jshintStylish));
+    });
+
+    //Habilita o plugin csshint que permite exibir os erros de código javascript
+    //no console.
+    gulp.watch('src/css/**/*.css').on('change', function(event) {
+        console.log("Linting " + event.path);
+        gulp.src(event.path)
+            .pipe(csslint())
+            .pipe(csslint.reporter());
+    });
 });
