@@ -9,7 +9,8 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     jshint = require('gulp-jshint'),
     jshintStylish = require('jshint-stylish'),
-    csslint = require('gulp-csslint');
+    csslint = require('gulp-csslint'),
+    autoprefixer = require('gulp-autoprefixer');
 
 //Obs.:
 //1- O Gulp por padrão trabalha assincronamente, ao contrário do Grunt que é
@@ -45,11 +46,13 @@ gulp.task('build-img', function() {
 //O plugin usemin permite fazer anotações no html para facilitar o trabalho com
 //os plugins de minificação de css e js. Neste caso estou trabalhando com o
 //uglify e o cssmin.
+//O autoprefixer inclui o prefixo dos navegadores para que eles supertem os
+//recursos do CCS3. Ele lê do arquivo browserslist o nº de versões a serem suportadas. 
 gulp.task('usemin', function() {
     return gulp.src('dist/**/*.html')
         .pipe(usemin({
             js: [uglify],
-            css: [cssmin]
+            css: [autoprefixer, cssmin]
         }))
         .pipe(gulp.dest('dist'))
 });
